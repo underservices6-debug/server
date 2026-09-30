@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KeyVault - License manager</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- left sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 2l-2 2m-1.5 1.5L16 7l-1.5-1.5-3 3 1.5 1.5-2 2-1.5-1.5-2 2 1.5 1.5-3 3a5.5 5.5 0 1 1-7.78-7.78l10-10a5.5 5.5 0 0 1 7.78 7.78z"></path>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>KeyVault</h1>
+          <p>License manager</p>
+        </div>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li>
+          <a class="sidebar-link active" data-nav="users">
+            <div class="sidebar-link-content">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              <span>Users</span>
+            </div>
+            <span id="nav-count" class="nav-badge">0</span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar-link" data-nav="keys">
+            <div class="sidebar-link-content">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m21 2-2 2m-1.5 1.5L16 7l-1.5-1.5-3 3 1.5 1.5-2 2-1.5-1.5-2 2 1.5 1.5-3 3a5.5 5.5 0 1 1-7.78-7.78l10-10a5.5 5.5 0 0 1 7.78 7.78z"></path>
+              </svg>
+              <span>Keys</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar-link" data-nav="devices">
+            <div class="sidebar-link-content">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+              <span>Devices</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar-link" data-nav="logs">
+            <div class="sidebar-link-content">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              <span>Logs</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar-link" data-nav="settings">
+            <div class="sidebar-link-content">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+              <span>Settings</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- right main content -->
+    <div class="main-wrapper">
+      <!-- top bar -->
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <button class="menu-toggle" id="btn-toggle-sidebar" title="Toggle Sidebar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <div class="page-title-block">
+            <h2 id="view-title">Users</h2>
+            <p id="view-subtitle">Registered user labels, customer records and assigned licenses</p>
+          </div>
+        </div>
+
+        <div class="top-bar-right">
+          <div class="search-box" id="top-search-container">
+            <span class="search-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </span>
+            <input type="text" id="search-input" placeholder="Search user, key or HWID">
+            <span class="search-shortcut">/</span>
+          </div>
+
+          <button class="icon-btn" id="btn-export" title="Export CSV">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </button>
+
+          <button class="btn-new-user" id="btn-open-create">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span id="btn-open-create-text">New user</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- main body -->
+      <div class="content-body">
+
+        <!-- view 1: users -->
+        <section id="view-users" class="tab-view">
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>USER</th>
+                  <th>TOTAL KEYS</th>
+                  <th>ACTIVE KEYS</th>
+                  <th>BOUND DEVICES</th>
+                  <th>LAST CREATED</th>
+                </tr>
+              </thead>
+              <tbody id="users-table-body">
+                <tr>
+                  <td colspan="5" style="text-align:center; padding:32px; color:var(--text-dim);">Loading users...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- view 2: keys -->
+        <section id="view-keys" class="tab-view hidden">
+          <!-- 4 stats cards -->
+          <section class="metrics-container">
+            <div class="card card-purple">
+              <div class="card-header">
+                <div class="card-icon card-icon-purple">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                </div>
+                <span>Total keys</span>
+              </div>
+              <div class="card-value" id="stat-total">0</div>
+              <div class="card-subtitle" id="stat-sub-unused">0 keys not yet redeemed</div>
+            </div>
+
+            <div class="card card-green">
+              <div class="card-header">
+                <div class="card-icon card-icon-green">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                  </svg>
+                </div>
+                <span>Active</span>
+              </div>
+              <div class="card-value" id="stat-active">0</div>
+              <div class="card-subtitle" id="stat-sub-active">0% of all keys</div>
+            </div>
+
+            <div class="card card-amber">
+              <div class="card-header">
+                <div class="card-icon card-icon-amber">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <span>Expiring soon</span>
+              </div>
+              <div class="card-value" id="stat-expiring">0</div>
+              <div class="card-subtitle">Within the next 3 days</div>
+            </div>
+
+            <div class="card card-cyan">
+              <div class="card-header">
+                <div class="card-icon card-icon-cyan">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                  </svg>
+                </div>
+                <span>Unbound HWID</span>
+              </div>
+              <div class="card-value" id="stat-unbound">0</div>
+              <div class="card-subtitle">Will lock on next launch</div>
+            </div>
+          </section>
+
+          <!-- pill tabs -->
+          <div class="pills-bar">
+            <button class="pill active" data-status="">
+              <span>All</span>
+              <span class="pill-count" id="pill-all-count">0</span>
+            </button>
+            <button class="pill" data-status="ACTIVE">
+              <span>Active</span>
+              <span class="pill-count" id="pill-active-count">0</span>
+            </button>
+            <button class="pill" data-status="UNUSED">
+              <span>Unused</span>
+              <span class="pill-count" id="pill-unused-count">0</span>
+            </button>
+            <button class="pill" data-status="EXPIRED">
+              <span>Expired</span>
+              <span class="pill-count" id="pill-expired-count">0</span>
+            </button>
+            <button class="pill" data-status="REVOKED">
+              <span>Banned</span>
+              <span class="pill-count" id="pill-banned-count">0</span>
+            </button>
+          </div>
+
+          <!-- keys table card -->
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>USER</th>
+                  <th>KEY</th>
+                  <th>HWID</th>
+                  <th>ACTIVATED &darr;</th>
+                  <th>EXPIRES</th>
+                  <th>STATUS</th>
+                  <th style="width:40px;"></th>
+                </tr>
+              </thead>
+              <tbody id="table-body">
+                <tr>
+                  <td colspan="7" style="text-align:center; padding:32px; color:var(--text-dim);">Loading license records...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- pagination -->
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px;">
+            <span id="page-indicator" style="font-size:12px; color:var(--text-dim);">Showing 0 of 0</span>
+            <div style="display:flex; gap:8px;">
+              <button id="btn-prev" class="icon-btn" style="width:30px; height:30px;" disabled>&larr;</button>
+              <button id="btn-next" class="icon-btn" style="width:30px; height:30px;" disabled>&rarr;</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- view 3: devices -->
+        <section id="view-devices" class="tab-view hidden">
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>HARDWARE ID (HWID)</th>
+                  <th>USER</th>
+                  <th>BOUND KEY</th>
+                  <th>IP ADDRESS</th>
+                  <th>ACTIVATED</th>
+                  <th>EXPIRES</th>
+                  <th>STATUS</th>
+                  <th style="text-align:right;">ACTION</th>
+                </tr>
+              </thead>
+              <tbody id="devices-table-body">
+                <tr>
+                  <td colspan="8" style="text-align:center; padding:32px; color:var(--text-dim);">Loading bound devices...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- view 4: logs -->
+        <section id="view-logs" class="tab-view hidden">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <span style="font-size:13px; color:var(--text-muted);">Real-time security and operations audit trail</span>
+            <button class="btn-secondary" id="btn-refresh-logs">Refresh Logs</button>
+          </div>
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>TIMESTAMP</th>
+                  <th>EVENT</th>
+                  <th>ACTOR</th>
+                  <th>DETAILS</th>
+                </tr>
+              </thead>
+              <tbody id="logs-table-body">
+                <tr>
+                  <td colspan="4" style="text-align:center; padding:32px; color:var(--text-dim);">Loading audit logs...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- view 5: settings -->
+        <section id="view-settings" class="tab-view hidden">
+          <div class="settings-grid">
+            <!-- admin security card -->
+            <div class="settings-card">
+              <div class="settings-card-header">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary);">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <h3 class="settings-card-title">Admin Security</h3>
+              </div>
+              <p class="settings-card-desc">Change the administrator login password for this KeyVault instance.</p>
+              
+              <div class="settings-info-row">
+                <span class="settings-info-label">Active Admin</span>
+                <span class="settings-info-value" id="settings-admin-username">admin</span>
+              </div>
+
+              <form id="form-change-password" style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label for="input-current-pass">Current Password</label>
+                  <input type="password" id="input-current-pass" required placeholder="Enter current password">
+                </div>
+                <div class="form-group" style="margin-bottom:0;">
+                  <label for="input-new-pass">New Password</label>
+                  <input type="password" id="input-new-pass" required placeholder="Minimum 8 characters">
+                </div>
+                <div class="form-group" style="margin-bottom:0;">
+                  <label for="input-confirm-pass">Confirm New Password</label>
+                  <input type="password" id="input-confirm-pass" required placeholder="Re-enter new password">
+                </div>
+                <div id="password-status" style="font-size:12px; min-height:16px;"></div>
+                <button type="submit" class="btn-submit" style="margin-top:4px;">Update Password</button>
+              </form>
+            </div>
+
+            <!-- database & backup card -->
+            <div class="settings-card">
+              <div class="settings-card-header">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--green);">
+                  <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                </svg>
+                <h3 class="settings-card-title">Database & Backups</h3>
+              </div>
+              <p class="settings-card-desc">Perform non-blocking hot database snapshots while server is actively running.</p>
+
+              <div class="settings-info-row">
+                <span class="settings-info-label">Database Engine</span>
+                <span class="settings-info-value">SQLite (Native WAL)</span>
+              </div>
+              <div class="settings-info-row">
+                <span class="settings-info-label">Active Database</span>
+                <span class="settings-info-value">server/data/licenses.db</span>
+              </div>
+              <div class="settings-info-row">
+                <span class="settings-info-label">Total Licenses</span>
+                <span class="settings-info-value" id="settings-db-keys">0</span>
+              </div>
+              <div class="settings-info-row">
+                <span class="settings-info-label">Active Sessions</span>
+                <span class="settings-info-value" id="settings-db-sessions">0</span>
+              </div>
+
+              <div style="margin-top:12px;">
+                <button class="btn-secondary" id="btn-create-backup" style="width:100%; padding:10px;">Create Hot Database Backup</button>
+                <div id="backup-status" style="font-size:12px; margin-top:8px; color:var(--text-dim); text-align:center;"></div>
+              </div>
+            </div>
+
+            <!-- system info & session card -->
+            <div class="settings-card">
+              <div class="settings-card-header">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan);">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <h3 class="settings-card-title">System & Session</h3>
+              </div>
+              <p class="settings-card-desc">Runtime environment status and administrator session control.</p>
+
+              <div class="settings-info-row">
+                <span class="settings-info-label">Node Runtime</span>
+                <span class="settings-info-value" id="settings-node-ver">-</span>
+              </div>
+              <div class="settings-info-row">
+                <span class="settings-info-label">Host Platform</span>
+                <span class="settings-info-value" id="settings-platform">-</span>
+              </div>
+              <div class="settings-info-row">
+                <span class="settings-info-label">Server Uptime</span>
+                <span class="settings-info-value" id="settings-uptime">-</span>
+              </div>
+              <div class="settings-info-row">
+                <span class="settings-info-label">Audit Log Count</span>
+                <span class="settings-info-value" id="settings-audit-count">0</span>
+              </div>
+
+              <div style="margin-top:auto; padding-top:16px;">
+                <button class="btn-danger" id="btn-settings-logout" style="width:100%;">Log Out of Administrator</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- new user / key modal -->
+  <div id="modal-create" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Create License</h3>
+        <button class="close-btn" data-modal="modal-create">&times;</button>
+      </div>
+
+      <form id="form-create">
+        <div class="form-group">
+          <label for="create-username">User / Note Label (e.g. zephyr, Discord purchase)</label>
+          <input type="text" id="create-username" placeholder="e.g. zephyr" required>
+        </div>
+        <div class="form-group">
+          <label for="create-duration">Key Duration</label>
+          <select id="create-duration">
+            <option value="86400" selected>24 Hours (1 Day)</option>
+            <option value="259200">3 Days</option>
+            <option value="604800">7 Days (1 Week)</option>
+            <option value="2592000">30 Days (1 Month)</option>
+            <option value="-1">Lifetime</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="create-note">Subtitle / Origin (e.g. Discord purchase, Staff, Giveaway)</label>
+          <input type="text" id="create-note" placeholder="e.g. Discord purchase">
+        </div>
+        <button type="submit" class="btn-submit">Generate License Key</button>
+      </form>
+
+      <div id="create-result" class="hidden" style="margin-top:16px;">
+        <label style="font-size:12px; color:var(--text-muted); font-weight:600; display:block; margin-bottom:6px;">
+          Generated Key (Shown Once):
+        </label>
+        <textarea id="output-keys" style="width:100%; height:80px; font-family:monospace; font-size:12px; resize:none;" readonly></textarea>
+        <div style="display:flex; gap:10px; margin-top:10px;">
+          <button class="btn-submit" id="btn-copy-generated" style="background:#272044; color:#c4b5fd;">Copy to Clipboard</button>
+          <button class="btn-submit" data-modal="modal-create">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- action context dropdown -->
+  <div id="row-menu" class="menu-dropdown hidden">
+    <button class="menu-item" id="menu-act-reset">Reset HWID</button>
+    <button class="menu-item" id="menu-act-revoke">Ban / Revoke Key</button>
+    <button class="menu-item menu-item-danger" id="menu-act-delete">Delete Key</button>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
